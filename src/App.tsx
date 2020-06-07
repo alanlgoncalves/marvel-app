@@ -1,11 +1,26 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer, Theme } from '@react-navigation/native';
+import MainStack from './routes';
 
 const App: React.FC = () => {
+  const theme: Theme = {
+    dark: false,
+    colors: {
+      primary: '#880018',
+      background: '#FFFFFF',
+      card: '#FFFFFF',
+      text: '#000000',
+      border: '#FFFFFF',
+    },
+  };
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 32 }}>Marvel App!</Text>
-    </View>
+    <PaperProvider>
+      <NavigationContainer theme={theme}>
+        <MainStack />
+      </NavigationContainer>
+    </PaperProvider>
   );
 };
 
