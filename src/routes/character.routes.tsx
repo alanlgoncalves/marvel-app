@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -127,37 +127,34 @@ const CharacterBottomNavigationBar: React.FC<Props> = ({ route }: Props) => {
   const { colors } = useTheme();
 
   return (
-    <>
-      <StatusBar barStyle="light-content" backgroundColor={colors.background} />
-      <CharacterTab.Navigator
-        sceneAnimationEnabled={false}
-        shifting={!!1}
-        backBehavior="none"
-      >
-        <CharacterTab.Screen
-          name="CharacterBioTab"
-          component={CharacterBioStack}
-          initialParams={route.params}
-          options={{
-            tabBarLabel: 'Character',
-            tabBarIcon: ({ color }) => (
-              <Icon name="user" color={color} size={24} />
-            ),
-          }}
-        />
-        <CharacterTab.Screen
-          name="CharacterComicsTab"
-          component={CharacterComicsStack}
-          initialParams={route.params}
-          options={{
-            tabBarLabel: 'Comics',
-            tabBarIcon: ({ color }) => (
-              <Icon name="book-open" color={color} size={24} />
-            ),
-          }}
-        />
-      </CharacterTab.Navigator>
-    </>
+    <CharacterTab.Navigator
+      sceneAnimationEnabled={false}
+      shifting={!!1}
+      backBehavior="none"
+    >
+      <CharacterTab.Screen
+        name="CharacterBioTab"
+        component={CharacterBioStack}
+        initialParams={route.params}
+        options={{
+          tabBarLabel: 'Character',
+          tabBarIcon: ({ color }) => (
+            <Icon name="user" color={color} size={24} />
+          ),
+        }}
+      />
+      <CharacterTab.Screen
+        name="CharacterComicsTab"
+        component={CharacterComicsStack}
+        initialParams={route.params}
+        options={{
+          tabBarLabel: 'Comics',
+          tabBarIcon: ({ color }) => (
+            <Icon name="book-open" color={color} size={24} />
+          ),
+        }}
+      />
+    </CharacterTab.Navigator>
   );
 };
 
