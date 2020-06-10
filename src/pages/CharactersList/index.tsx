@@ -117,7 +117,7 @@ const CharactersList: React.FC = () => {
         </HeroItem>
       );
     },
-    [colors.border, colors.text, navigator],
+    [colors, navigator],
   );
 
   const renderSeparator = useCallback(() => {

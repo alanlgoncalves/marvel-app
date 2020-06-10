@@ -2,6 +2,7 @@ import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -48,24 +49,51 @@ export const ThemeProvider: React.FC = ({ children }) => {
     };
   }, []);
 
-  const [theme, setTheme] = useState(defaultTheme);
-  const [colors, setColors] = useState(defaultTheme.colors);
+  const [theme, setTheme] = useState({} as Theme);
+  const [colors, setColors] = useState({} as Colors);
 
   const toggleTheme = useCallback(async () => {
+    let newTheme: Theme;
+
     if (theme.dark) {
-      setTheme(defaultTheme);
-      setColors(defaultTheme.colors);
+      newTheme = defaultTheme;
     } else {
-      setTheme(darkTheme);
-      setColors(darkTheme.colors);
+      newTheme = darkTheme;
     }
 
-    await AsyncStorage.setItem('@MarvelApp:theme', JSON.stringify(theme));
+    setTheme(newTheme);
+    setColors(newTheme.colors);
+    await AsyncStorage.setItem('@MarvelApp:theme', JSON.stringify(newTheme));
   }, [theme]);
+
+  useEffect(() => {
+    async function loadTheme(): Promise<void> {
+      const themeJSON = await AsyncStorage.getItem('@MarvelApp:theme');
+
+      if (!themeJSON) {
+        await AsyncStorage.setItem(
+          '@MarvelApp:theme',
+          JSON.stringify(defaultTheme),
+        );
+
+        setTheme(defaultTheme);
+        setColors(defaultTheme.colors);
+
+        return;
+      }
+
+      const loadedTheme: Theme = JSON.parse(themeJSON);
+
+      setTheme(loadedTheme);
+      setColors(loadedTheme.colors);
+    }
+
+    loadTheme();
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, colors, toggleTheme }}>
-      {children}
+      {theme && theme.colors && children}
     </ThemeContext.Provider>
   );
 };
