@@ -3,6 +3,7 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 import { Container, HeroDescription, HeroImage } from './styles';
+import { useTheme } from '../../hooks/Theme';
 
 interface Character {
   id: number;
@@ -40,6 +41,7 @@ type Props = {
 
 const CharacterBio: React.FC<Props> = ({ route, navigation }: Props) => {
   const { character } = route.params;
+  const { colors } = useTheme();
 
   useEffect(() => {
     navigation.setOptions({
@@ -56,7 +58,7 @@ const CharacterBio: React.FC<Props> = ({ route, navigation }: Props) => {
   return (
     <Container>
       <HeroImage source={{ uri: imageUri }} />
-      <HeroDescription>
+      <HeroDescription style={{ color: colors.text }}>
         {character.description || 'No description available'}
       </HeroDescription>
     </Container>

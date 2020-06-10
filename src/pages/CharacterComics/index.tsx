@@ -12,6 +12,7 @@ import {
   ComicTitleText,
   Container,
 } from './styles';
+import { useTheme } from '../../hooks/Theme';
 
 interface Comic {
   id: number;
@@ -61,6 +62,7 @@ const CharacterComics: React.FC<Props> = ({ route }: Props) => {
   const [totalItems, setTotalItems] = useState(null);
   const [comics, setComics] = useState<Comic[]>([]);
   const [loading, setLoading] = useState(false);
+  const { colors } = useTheme();
 
   const loadNextComics = useCallback(() => {
     if (totalItems === comics.length) {
@@ -101,8 +103,12 @@ const CharacterComics: React.FC<Props> = ({ route }: Props) => {
               uri: `${item.thumbnail.path}.${item.thumbnail.extension}`,
             }}
           />
-          <ComicTitleText>{item.title}</ComicTitleText>
-          <ComicPagesText>{`${item.pageCount} pages`}</ComicPagesText>
+          <ComicTitleText style={{ color: colors.text }}>
+            {item.title}
+          </ComicTitleText>
+          <ComicPagesText
+            style={{ color: colors.text }}
+          >{`${item.pageCount} pages`}</ComicPagesText>
         </ComicContent>
       );
     },

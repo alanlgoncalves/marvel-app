@@ -1,25 +1,38 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import CharactersList from '../pages/CharactersList';
 import AppInfo from '../pages/AppInfo';
+import { useTheme } from '../hooks/Theme';
 
 const MainTab = createMaterialBottomTabNavigator();
 const CharactersListStackNavigator = createStackNavigator();
 const InfoStackNavigator = createStackNavigator();
 
 const CharactersListStack: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <CharactersListStackNavigator.Navigator
       screenOptions={{
         headerTintColor: '#fff',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#880018',
+          backgroundColor: theme.colors.primary,
         },
+        headerRight: ({ tintColor }) => (
+          <TouchableOpacity onPress={() => toggleTheme()}>
+            <Icon
+              name={theme.dark ? 'sun' : 'moon'}
+              size={20}
+              color={tintColor}
+              style={{ marginRight: 15 }}
+            />
+          </TouchableOpacity>
+        ),
       }}
     >
       <CharactersListStackNavigator.Screen
@@ -32,29 +45,43 @@ const CharactersListStack: React.FC = () => {
 };
 
 const AppInfoStack: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <InfoStackNavigator.Navigator
       screenOptions={{
         headerTintColor: '#fff',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#880018',
+          backgroundColor: theme.colors.primary,
         },
+        headerRight: ({ tintColor }) => (
+          <TouchableOpacity onPress={() => toggleTheme()}>
+            <Icon
+              name={theme.dark ? 'sun' : 'moon'}
+              size={20}
+              color={tintColor}
+              style={{ marginRight: 15 }}
+            />
+          </TouchableOpacity>
+        ),
       }}
     >
       <CharactersListStackNavigator.Screen
         name="AppInfo"
         component={AppInfo}
-        options={{ headerTitle: 'APP Info' }}
+        options={{ headerTitle: 'About' }}
       />
     </InfoStackNavigator.Navigator>
   );
 };
 
 export const MainBottomNavigationBar: React.FC = () => {
+  const { colors } = useTheme();
+
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#880018" />
+      <StatusBar barStyle="light-content" backgroundColor={colors.primary} />
       <MainTab.Navigator
         initialRouteName="Main"
         shifting={!!1}
@@ -75,7 +102,7 @@ export const MainBottomNavigationBar: React.FC = () => {
           name="AppInfo"
           component={AppInfoStack}
           options={{
-            tabBarLabel: 'AppInfo',
+            tabBarLabel: 'About',
             tabBarIcon: ({ color }) => (
               <Icon name="info" color={color} size={24} />
             ),

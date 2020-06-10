@@ -15,8 +15,10 @@ export const HeroAvatarBorder = styled.View`
   width: 82px;
   height: 82px;
   margin-right: 10px;
-  border: 2px solid #000;
   border-radius: 50px;
+  border-color: #000;
+  border-style: solid;
+  border-width: 2px;
 `;
 
 export const HeroAvatarImage = styled.Image`
@@ -31,7 +33,7 @@ export const HeroInformation = styled.View`
   justify-content: center;
 `;
 
-export const HeroName = styled.Text`
+export const HeroNameText = styled.Text`
   font-size: 20px;
   line-height: 23px;
 `;

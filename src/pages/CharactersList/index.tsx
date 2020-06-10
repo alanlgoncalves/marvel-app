@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-import apiKey from '../../config/api-key';
 import { ActivityIndicator, Alert, FlatList } from 'react-native';
+import apiKey from '../../config/api-key';
 import api from '../../services/api';
 import {
   ComicsAvailableText,
@@ -12,8 +12,9 @@ import {
   HeroInformation,
   HeroItem,
   HeroItemSeparator,
-  HeroName,
+  HeroNameText,
 } from './styles';
+import { useTheme } from '../../hooks/Theme';
 
 interface Character {
   id: number;
@@ -33,6 +34,8 @@ const CharactersList: React.FC = () => {
 
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const { colors } = useTheme();
 
   const loadNextCharacters = useCallback(() => {
     setLoading(true);
@@ -76,37 +79,46 @@ const CharactersList: React.FC = () => {
     Promise.resolve(storageCharacters);
   }, [characters]);
 
-  const renderItem = useCallback(({ item }) => {
-    return (
-      <HeroItem
-        key={item.id}
-        onPress={() => {
-          navigator.navigate('CharacterTabs', { character: item });
-        }}
-      >
-        <HeroItemSeparator />
-        <HeroAvatarBorder>
-          <HeroAvatarImage
-            source={{
-              uri: `${item.thumbnail.path}.${item.thumbnail.extension}`,
-            }}
-          />
-        </HeroAvatarBorder>
-        <HeroInformation>
-          <HeroName>{item.name}</HeroName>
-          {!!item.description && (
-            <ComicsAvailableText>Description available</ComicsAvailableText>
-          )}
-          {!item.description && (
-            <ComicsAvailableText>Description not available</ComicsAvailableText>
-          )}
-          <ComicsAvailableText>
-            {`Comics: ${item.comics.available}`}
-          </ComicsAvailableText>
-        </HeroInformation>
-      </HeroItem>
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({ item }) => {
+      return (
+        <HeroItem
+          key={item.id}
+          onPress={() => {
+            navigator.navigate('CharacterTabs', { character: item });
+          }}
+        >
+          <HeroItemSeparator />
+          <HeroAvatarBorder style={{ borderColor: colors.border }}>
+            <HeroAvatarImage
+              source={{
+                uri: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+              }}
+            />
+          </HeroAvatarBorder>
+          <HeroInformation>
+            <HeroNameText style={{ color: colors.text }}>
+              {item.name}
+            </HeroNameText>
+            {!!item.description && (
+              <ComicsAvailableText style={{ color: colors.text }}>
+                Description available
+              </ComicsAvailableText>
+            )}
+            {!item.description && (
+              <ComicsAvailableText style={{ color: colors.text }}>
+                Description not available
+              </ComicsAvailableText>
+            )}
+            <ComicsAvailableText style={{ color: colors.text }}>
+              {`Comics: ${item.comics.available}`}
+            </ComicsAvailableText>
+          </HeroInformation>
+        </HeroItem>
+      );
+    },
+    [colors.border, colors.text, navigator],
+  );
 
   const renderSeparator = useCallback(() => {
     return <HeroItemSeparator />;
@@ -130,6 +142,7 @@ const CharactersList: React.FC = () => {
         ListFooterComponent={renderLoadingFooter}
         onEndReached={loadNextCharacters}
         onEndReachedThreshold={0.5}
+        refreshing={refreshing}
       />
     </Content>
   );

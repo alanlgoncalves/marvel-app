@@ -10,6 +10,7 @@ import {
 
 import CharacterBio from '../pages/CharacterBio';
 import CharacterComics from '../pages/CharacterComics';
+import { useTheme } from '../hooks/Theme';
 
 const CharacterTab = createMaterialBottomTabNavigator();
 const CharacterBioStackNavigator = createStackNavigator();
@@ -50,13 +51,15 @@ type Props = {
 };
 
 const CharacterBioStack: React.FC<Props> = ({ route, navigation }: Props) => {
+  const { colors } = useTheme().theme;
+
   return (
     <CharacterBioStackNavigator.Navigator
       screenOptions={{
         headerTintColor: '#fff',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#880018',
+          backgroundColor: colors.primary,
         },
       }}
     >
@@ -86,13 +89,15 @@ const CharacterComicsStack: React.FC<Props> = ({
   route,
   navigation,
 }: Props) => {
+  const { colors } = useTheme();
+
   return (
     <CharacterComicsStackNavigator.Navigator
       screenOptions={{
         headerTintColor: '#fff',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#880018',
+          backgroundColor: colors.primary,
         },
       }}
     >
@@ -102,12 +107,12 @@ const CharacterComicsStack: React.FC<Props> = ({
         initialParams={route.params}
         options={{
           headerTitle: 'Comics',
-          headerLeft: () => (
+          headerLeft: ({ tintColor }) => (
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Icon
                 name="chevron-left"
                 size={20}
-                color="#fff"
+                color={tintColor}
                 style={{ marginLeft: 15 }}
               />
             </TouchableOpacity>
@@ -119,9 +124,11 @@ const CharacterComicsStack: React.FC<Props> = ({
 };
 
 const CharacterBottomNavigationBar: React.FC<Props> = ({ route }: Props) => {
+  const { colors } = useTheme();
+
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#880018" />
+      <StatusBar barStyle="light-content" backgroundColor={colors.background} />
       <CharacterTab.Navigator
         sceneAnimationEnabled={false}
         shifting={!!1}
