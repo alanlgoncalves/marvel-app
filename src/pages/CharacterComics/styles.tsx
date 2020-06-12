@@ -29,3 +29,12 @@ export const ComicPagesText = styled.Text`
   margin-top: 5px;
   font-size: 12px;
 `;
+
+export const ActivityIndicatorColumn = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: ${Dimensions.get('window').height * 0.65}px;
+`;

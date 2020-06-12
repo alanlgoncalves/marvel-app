@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import apiKey from '../../config/api-key';
 import api from '../../services/api';
 import {
+  ActivityIndicatorColumn,
   ComicContent,
   ComicImage,
   ComicPagesText,
@@ -13,6 +14,7 @@ import {
   Container,
 } from './styles';
 import { useTheme } from '../../hooks/Theme';
+import { Character } from '../../models/Characters';
 
 interface Comic {
   id: number;
@@ -21,19 +23,6 @@ interface Comic {
   thumbnail: {
     path: string;
     extension: string;
-  };
-}
-
-interface Character {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-  comics: {
-    available: number;
   };
 }
 
@@ -120,7 +109,11 @@ const CharacterComics: React.FC<Props> = ({ route }: Props) => {
       return null;
     }
 
-    return <ActivityIndicator />;
+    return (
+      <ActivityIndicatorColumn>
+        <ActivityIndicator color={colors.text} />
+      </ActivityIndicatorColumn>
+    );
   }, [loading]);
 
   useEffect(() => {

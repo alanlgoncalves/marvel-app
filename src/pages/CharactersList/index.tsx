@@ -15,19 +15,7 @@ import {
   HeroNameText,
 } from './styles';
 import { useTheme } from '../../hooks/Theme';
-
-interface Character {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-  comics: {
-    available: number;
-  };
-}
+import { Character } from '../../models/Characters';
 
 const CharactersList: React.FC = () => {
   const navigator = useNavigation();
@@ -52,7 +40,7 @@ const CharactersList: React.FC = () => {
         setCharacters([...characters, ...response.data.data.results]);
       })
       .catch(() => {
-        Alert.alert('Error on load new Characters');
+        Alert.alert('Error on load new Characters.ts');
       })
       .finally(() => {
         setLoading(false);
@@ -129,7 +117,12 @@ const CharactersList: React.FC = () => {
       return null;
     }
 
-    return <ActivityIndicator style={{ marginBottom: 20 }} />;
+    return (
+      <ActivityIndicator
+        color={colors.text}
+        style={{ marginBottom: 20, marginTop: 20 }}
+      />
+    );
   }, [loading]);
 
   return (
@@ -141,7 +134,7 @@ const CharactersList: React.FC = () => {
         keyExtractor={(item) => item.id.toString()}
         ListFooterComponent={renderLoadingFooter}
         onEndReached={loadNextCharacters}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.3}
         refreshing={refreshing}
       />
     </Content>

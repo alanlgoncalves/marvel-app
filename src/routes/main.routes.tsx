@@ -5,11 +5,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 import CharactersList from '../pages/CharactersList';
+import FavoriteCharactersList from '../pages/FavoriteCharactersList';
 import AppInfo from '../pages/AppInfo';
 import { useTheme } from '../hooks/Theme';
 
 const MainTab = createMaterialBottomTabNavigator();
 const CharactersListStackNavigator = createStackNavigator();
+const FavoritesCharactersListStackNavigator = createStackNavigator();
 const InfoStackNavigator = createStackNavigator();
 
 const CharactersListStack: React.FC = () => {
@@ -41,6 +43,38 @@ const CharactersListStack: React.FC = () => {
         options={{ headerTitle: 'Characters' }}
       />
     </CharactersListStackNavigator.Navigator>
+  );
+};
+
+const FavoritesCharactersListStack: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <FavoritesCharactersListStackNavigator.Navigator
+      screenOptions={{
+        headerTintColor: '#fff',
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: theme.colors.primary,
+        },
+        headerRight: ({ tintColor }) => (
+          <TouchableOpacity onPress={() => toggleTheme()}>
+            <Icon
+              name={theme.dark ? 'sun' : 'moon'}
+              size={20}
+              color={tintColor}
+              style={{ marginRight: 15 }}
+            />
+          </TouchableOpacity>
+        ),
+      }}
+    >
+      <CharactersListStackNavigator.Screen
+        name="Favorites"
+        component={FavoriteCharactersList}
+        options={{ headerTitle: 'Favorites' }}
+      />
+    </FavoritesCharactersListStackNavigator.Navigator>
   );
 };
 
@@ -95,6 +129,16 @@ export const MainBottomNavigationBar: React.FC = () => {
             tabBarLabel: 'Characters',
             tabBarIcon: ({ color }) => (
               <Icon name="list" color={color} size={24} />
+            ),
+          }}
+        />
+        <MainTab.Screen
+          name="Favorites"
+          component={FavoritesCharactersListStack}
+          options={{
+            tabBarLabel: 'Favorites',
+            tabBarIcon: ({ color }) => (
+              <Icon name="star" color={color} size={24} />
             ),
           }}
         />

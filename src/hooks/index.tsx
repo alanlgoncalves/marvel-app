@@ -1,8 +1,13 @@
 import React from 'react';
 import { ThemeProvider } from './Theme';
+import { FavoritesProvider } from './FavoriteCharacters';
 
 const AppProvider: React.FC = ({ children }) => {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <FavoritesProvider>
+      <ThemeProvider>{children}</ThemeProvider>
+    </FavoritesProvider>
+  );
 };
 
 export default AppProvider;
