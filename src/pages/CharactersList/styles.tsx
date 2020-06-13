@@ -47,3 +47,18 @@ export const HeroItemSeparator = styled.View`
   height: 1px;
   background-color: #ccc;
 `;
+
+export const HeroSearch = styled.View`
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 10px 20px;
+  height: 50px;
+`;
+
+export const HeroSearchInput = styled.TextInput`
+  flex: 0.8;
+
+  text-align: center;
+  font-size: 18px;
+  height: 50px;
+`;
