@@ -173,7 +173,7 @@ const CharactersList: React.FC = () => {
             alignItems: 'center',
           }}
         >
-          <Icon name="search" color={colors.text} size={20} />
+          <Icon name="search" color={theme.dark ? '#FFF' : '#CCC'} size={20} />
           <HeroSearchInput
             placeholder="Type your character name here"
             placeholderTextColor={theme.dark ? '#FFF' : '#CCC'}
@@ -182,7 +182,7 @@ const CharactersList: React.FC = () => {
             style={{ color: colors.text }}
           />
           {!!searchName && (
-            <Icon name="x" color={'#880018'} size={20} onPress={clearSearch} />
+            <Icon name="x" color="#880018" size={20} onPress={clearSearch} />
           )}
         </View>
       </HeroSearch>
