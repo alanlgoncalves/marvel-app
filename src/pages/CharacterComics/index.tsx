@@ -1,5 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Dimensions, FlatList } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Dimensions,
+  FlatList,
+  Text,
+} from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -52,13 +58,12 @@ const CharacterComics: React.FC<Props> = ({ route }: Props) => {
   const [comics, setComics] = useState<Comic[]>([]);
   const [loading, setLoading] = useState(false);
   const { colors } = useTheme();
+  const { character } = route.params;
 
   const loadNextComics = useCallback(() => {
-    if (totalItems === comics.length) {
+    if (character.comics.available > 0 && totalItems === comics.length) {
       return;
     }
-
-    const { character } = route.params;
 
     setLoading(true);
 
@@ -144,16 +149,24 @@ const CharacterComics: React.FC<Props> = ({ route }: Props) => {
 
   return (
     <Container>
-      <FlatList<Comic>
-        style={{ maxHeight: Dimensions.get('window').height * 0.82 }}
-        horizontal={!!1}
-        data={comics}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => item.id.toString()}
-        ListFooterComponent={renderLoadingFooter}
-        onEndReached={loadNextComics}
-        onEndReachedThreshold={0.5}
-      />
+      {!!character.comics.available && (
+        <FlatList<Comic>
+          style={{ maxHeight: Dimensions.get('window').height * 0.82 }}
+          horizontal={!!1}
+          data={comics}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => item.id.toString()}
+          ListFooterComponent={renderLoadingFooter}
+          onEndReached={loadNextComics}
+          onEndReachedThreshold={0.5}
+        />
+      )}
+
+      {!character.comics.available && (
+        <Text style={{ color: colors.text, fontSize: 18 }}>
+          {`${character.name} does not have comics`}
+        </Text>
+      )}
     </Container>
   );
 };
