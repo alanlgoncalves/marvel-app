@@ -44,14 +44,14 @@ export const FavoritesProvider: React.FC<Props> = ({ children }: Props) => {
 
         setFavoriteCharacters(sortedCharacters);
 
+        Toast.showWithGravity(
+          'Character add on favorites',
+          Toast.SHORT,
+          Toast.BOTTOM,
+        );
+
         return sortedCharacters;
       }
-
-      Toast.showWithGravity(
-        'Character add on favorites',
-        Toast.SHORT,
-        Toast.BOTTOM,
-      );
 
       return favoriteCharacters;
     },
