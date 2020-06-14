@@ -1,5 +1,9 @@
 # MARVEL-APP
 [![Build Status](https://travis-ci.com/alanlgoncalves/gobarber-web.svg?branch=master)](https://travis-ci.com/alanlgoncalves/gobarber-web)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_marvel-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=alanlgoncalves_marvel-app)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_marvel-app&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=alanlgoncalves_marvel-app)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_marvel-app&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=alanlgoncalves_marvel-app)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_marvel-app&metric=security_rating)](https://sonarcloud.io/dashboard?id=alanlgoncalves_marvel-app)
 
 This project is an APP developed to show the Marvel characters information using the open Marvel API
 
