@@ -5,7 +5,7 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_marvel-app&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=alanlgoncalves_marvel-app)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=alanlgoncalves_marvel-app&metric=security_rating)](https://sonarcloud.io/dashboard?id=alanlgoncalves_marvel-app)
 
-This project is an APP developed to show the Marvel characters information using the open Marvel API
+This project is an APP developed to show the Marvel characters information using the open [Marvel API](https://developer.marvel.com/).
 
 ## Functionalities
 - Infinity scrollable characters order by name
