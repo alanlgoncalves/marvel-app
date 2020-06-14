@@ -1,0 +1,9 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:drawable="@color/primary" />
+  <item
+    android:width="240dp"
+    android:height="128dp"
+    android:drawable="@drawable/splash_logo"
+    android:gravity="center"
+  />
+</layer-list>
