@@ -50,6 +50,15 @@ type Props = {
   navigation: ProfileScreenNavigationProp;
 };
 
+type NavigationHeaderProps = {
+  tintColor?: string | undefined;
+};
+
+type TabProps = {
+  focused: boolean;
+  color: string;
+};
+
 const CharacterBioStack: React.FC<Props> = ({ route, navigation }: Props) => {
   const { colors } = useTheme().theme;
 
@@ -69,12 +78,12 @@ const CharacterBioStack: React.FC<Props> = ({ route, navigation }: Props) => {
         initialParams={route.params}
         options={{
           headerTitle: 'Character',
-          headerLeft: () => (
+          headerLeft: ({ tintColor }: NavigationHeaderProps) => (
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Icon
                 name="chevron-left"
                 size={20}
-                color="#fff"
+                color={tintColor}
                 style={{ marginLeft: 15 }}
               />
             </TouchableOpacity>
@@ -107,7 +116,7 @@ const CharacterComicsStack: React.FC<Props> = ({
         initialParams={route.params}
         options={{
           headerTitle: 'Comics',
-          headerLeft: ({ tintColor }) => (
+          headerLeft: ({ tintColor }: NavigationHeaderProps) => (
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Icon
                 name="chevron-left"
@@ -124,8 +133,6 @@ const CharacterComicsStack: React.FC<Props> = ({
 };
 
 const CharacterBottomNavigationBar: React.FC<Props> = ({ route }: Props) => {
-  const { colors } = useTheme();
-
   return (
     <CharacterTab.Navigator
       sceneAnimationEnabled={false}
@@ -138,7 +145,7 @@ const CharacterBottomNavigationBar: React.FC<Props> = ({ route }: Props) => {
         initialParams={route.params}
         options={{
           tabBarLabel: 'Character',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: TabProps) => (
             <Icon name="user" color={color} size={24} />
           ),
         }}
@@ -149,7 +156,7 @@ const CharacterBottomNavigationBar: React.FC<Props> = ({ route }: Props) => {
         initialParams={route.params}
         options={{
           tabBarLabel: 'Comics',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: TabProps) => (
             <Icon name="book-open" color={color} size={24} />
           ),
         }}

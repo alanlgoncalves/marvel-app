@@ -30,6 +30,10 @@ type Props = {
   navigation: ProfileScreenNavigationProp;
 };
 
+type NavigationHeader = {
+  tintColor?: string | undefined;
+};
+
 const CharacterBio: React.FC<Props> = ({ route, navigation }: Props) => {
   const { character } = route.params;
   const { colors } = useTheme();
@@ -50,7 +54,7 @@ const CharacterBio: React.FC<Props> = ({ route, navigation }: Props) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitle: character.name,
-      headerRight: ({ tintColor }) => (
+      headerRight: ({ tintColor }: NavigationHeader): React.ReactNode => (
         <TouchableOpacity onPress={() => addRemoveCharacter(character)}>
           <Icon
             name={characterFavorite ? 'star' : 'star-o'}

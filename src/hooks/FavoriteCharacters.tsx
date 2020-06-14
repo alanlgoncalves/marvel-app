@@ -1,5 +1,6 @@
 import React, {
   createContext,
+  ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -19,7 +20,11 @@ const FavoriteCharactersContext = createContext<FavoriteCharactersContextData>(
   {} as FavoriteCharactersContextData,
 );
 
-export const FavoritesProvider: React.FC = ({ children }) => {
+interface Props {
+  children: ReactNode;
+}
+
+export const FavoritesProvider: React.FC<Props> = ({ children }: Props) => {
   const [favoriteCharacters, setFavoriteCharacters] = useState<Character[]>(
     [] as Character[],
   );

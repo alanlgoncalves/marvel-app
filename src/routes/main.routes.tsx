@@ -14,6 +14,15 @@ const CharactersListStackNavigator = createStackNavigator();
 const FavoritesCharactersListStackNavigator = createStackNavigator();
 const InfoStackNavigator = createStackNavigator();
 
+type NavigationHeaderProps = {
+  tintColor?: string | undefined;
+};
+
+type TabProps = {
+  focused: boolean;
+  color: string;
+};
+
 const CharactersListStack: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
@@ -25,7 +34,7 @@ const CharactersListStack: React.FC = () => {
         headerStyle: {
           backgroundColor: theme.colors.primary,
         },
-        headerRight: ({ tintColor }) => (
+        headerRight: ({ tintColor }: NavigationHeaderProps) => (
           <TouchableOpacity onPress={() => toggleTheme()}>
             <Icon
               name={theme.dark ? 'sun' : 'moon'}
@@ -57,7 +66,7 @@ const FavoritesCharactersListStack: React.FC = () => {
         headerStyle: {
           backgroundColor: theme.colors.primary,
         },
-        headerRight: ({ tintColor }) => (
+        headerRight: ({ tintColor }: NavigationHeaderProps) => (
           <TouchableOpacity onPress={() => toggleTheme()}>
             <Icon
               name={theme.dark ? 'sun' : 'moon'}
@@ -89,7 +98,7 @@ const AppInfoStack: React.FC = () => {
         headerStyle: {
           backgroundColor: theme.colors.primary,
         },
-        headerRight: ({ tintColor }) => (
+        headerRight: ({ tintColor }: NavigationHeaderProps) => (
           <TouchableOpacity onPress={() => toggleTheme()}>
             <Icon
               name={theme.dark ? 'sun' : 'moon'}
@@ -127,7 +136,7 @@ export const MainBottomNavigationBar: React.FC = () => {
           component={CharactersListStack}
           options={{
             tabBarLabel: 'Characters',
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ color }: TabProps) => (
               <Icon name="list" color={color} size={24} />
             ),
           }}
@@ -137,7 +146,7 @@ export const MainBottomNavigationBar: React.FC = () => {
           component={FavoritesCharactersListStack}
           options={{
             tabBarLabel: 'Favorites',
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ color }: TabProps) => (
               <Icon name="star" color={color} size={24} />
             ),
           }}
@@ -147,7 +156,7 @@ export const MainBottomNavigationBar: React.FC = () => {
           component={AppInfoStack}
           options={{
             tabBarLabel: 'About',
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ color }: TabProps) => (
               <Icon name="info" color={color} size={24} />
             ),
           }}

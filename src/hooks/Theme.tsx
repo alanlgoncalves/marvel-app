@@ -1,5 +1,6 @@
 import React, {
   createContext,
+  ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -26,7 +27,11 @@ interface ThemeContextData {
 
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
 
-export const ThemeProvider: React.FC = ({ children }) => {
+interface Props {
+  children: ReactNode;
+}
+
+export const ThemeProvider: React.FC<Props> = ({ children }: Props) => {
   const defaultTheme = useMemo<Theme>((): Theme => {
     return {
       ...DefaultTheme,

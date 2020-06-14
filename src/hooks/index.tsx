@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ThemeProvider } from './Theme';
 import { FavoritesProvider } from './FavoriteCharacters';
 
-const AppProvider: React.FC = ({ children }) => {
+interface Props {
+  children: ReactNode;
+}
+
+const AppProvider: React.FC<Props> = ({ children }: Props) => {
   return (
     <FavoritesProvider>
       <ThemeProvider>{children}</ThemeProvider>

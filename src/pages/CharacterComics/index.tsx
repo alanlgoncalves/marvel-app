@@ -100,9 +100,9 @@ const CharacterComics: React.FC<Props> = ({ route }: Props) => {
           <ComicTitleText style={{ color: colors.text }}>
             {item.title}
           </ComicTitleText>
-          <ComicPagesText
-            style={{ color: colors.text }}
-          >{`${item.pageCount} pages`}</ComicPagesText>
+          <ComicPagesText style={{ color: colors.text }}>
+            `${item.pageCount} pages`
+          </ComicPagesText>
         </ComicContent>
       );
     },
