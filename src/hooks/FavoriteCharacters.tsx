@@ -25,7 +25,7 @@ export const FavoritesProvider: React.FC = ({ children }) => {
   );
 
   const addCharacter = useCallback(
-    (character: Character): void => {
+    (character: Character): Character[] => {
       const findCharacter = favoriteCharacters.find(
         (item) => item.id === character.id,
       );
@@ -38,6 +38,8 @@ export const FavoritesProvider: React.FC = ({ children }) => {
         );
 
         setFavoriteCharacters(sortedCharacters);
+
+        return sortedCharacters;
       }
 
       Toast.showWithGravity(
@@ -45,12 +47,14 @@ export const FavoritesProvider: React.FC = ({ children }) => {
         Toast.SHORT,
         Toast.BOTTOM,
       );
+
+      return favoriteCharacters;
     },
     [favoriteCharacters, setFavoriteCharacters],
   );
 
   const removeCharacter = useCallback(
-    (id: number): void => {
+    (id: number): Character[] => {
       const filteredCharacters = favoriteCharacters.filter(
         (character) => character.id !== id,
       );
@@ -62,6 +66,8 @@ export const FavoritesProvider: React.FC = ({ children }) => {
         Toast.SHORT,
         Toast.BOTTOM,
       );
+
+      return filteredCharacters;
     },
     [favoriteCharacters, setFavoriteCharacters],
   );
@@ -72,17 +78,17 @@ export const FavoritesProvider: React.FC = ({ children }) => {
         (item) => item.id === character.id,
       );
 
+      let characters;
+
       if (!findCharacter) {
-        addCharacter(character);
+        characters = addCharacter(character);
       } else {
-        removeCharacter(character.id);
+        characters = removeCharacter(character.id);
       }
 
-      const sortedCharacters = [...favoriteCharacters, character].sort(
-        function (a, b) {
-          return a.name.localeCompare(b.name);
-        },
-      );
+      const sortedCharacters = characters.sort(function (a, b) {
+        return a.name.localeCompare(b.name);
+      });
 
       await AsyncStorage.setItem(
         '@MarvelApp:favorite_characters',

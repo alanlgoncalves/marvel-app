@@ -4,7 +4,7 @@ export const Content = styled.View`
   flex: 1;
 `;
 
-export const HeroItem = styled.TouchableOpacity`
+export const HeroItem = styled.View`
   flex-direction: row;
   min-height: 78px;
   margin: 5px 0px;

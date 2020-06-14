@@ -2,7 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/Feather';
-import { ActivityIndicator, Alert, FlatList, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  TouchableNativeFeedback,
+  View,
+} from 'react-native';
 import apiKey from '../../config/api-key';
 import api from '../../services/api';
 import {
@@ -107,39 +113,41 @@ const CharactersList: React.FC = () => {
   const renderItem = useCallback(
     ({ item }) => {
       return (
-        <HeroItem
+        <TouchableNativeFeedback
           key={item.id}
           onPress={() => {
             navigator.navigate('CharacterTabs', { character: item });
           }}
         >
-          <HeroItemSeparator />
-          <HeroAvatarBorder style={{ borderColor: colors.border }}>
-            <HeroAvatarImage
-              source={{
-                uri: `${item.thumbnail.path}.${item.thumbnail.extension}`,
-              }}
-            />
-          </HeroAvatarBorder>
-          <HeroInformation>
-            <HeroNameText style={{ color: colors.text }}>
-              {item.name}
-            </HeroNameText>
-            {!!item.description && (
+          <HeroItem>
+            <HeroItemSeparator />
+            <HeroAvatarBorder style={{ borderColor: colors.border }}>
+              <HeroAvatarImage
+                source={{
+                  uri: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+                }}
+              />
+            </HeroAvatarBorder>
+            <HeroInformation>
+              <HeroNameText style={{ color: colors.text }}>
+                {item.name}
+              </HeroNameText>
+              {!!item.description && (
+                <ComicsAvailableText style={{ color: colors.text }}>
+                  Description available
+                </ComicsAvailableText>
+              )}
+              {!item.description && (
+                <ComicsAvailableText style={{ color: colors.text }}>
+                  Description not available
+                </ComicsAvailableText>
+              )}
               <ComicsAvailableText style={{ color: colors.text }}>
-                Description available
+                {`Comics: ${item.comics.available}`}
               </ComicsAvailableText>
-            )}
-            {!item.description && (
-              <ComicsAvailableText style={{ color: colors.text }}>
-                Description not available
-              </ComicsAvailableText>
-            )}
-            <ComicsAvailableText style={{ color: colors.text }}>
-              {`Comics: ${item.comics.available}`}
-            </ComicsAvailableText>
-          </HeroInformation>
-        </HeroItem>
+            </HeroInformation>
+          </HeroItem>
+        </TouchableNativeFeedback>
       );
     },
     [colors, navigator],
