@@ -82,4 +82,9 @@ $ yarn run android
 $ yarn run ios
 ```
 
+## Other information
 
+### Figma Project
+
+This project was developed using a
+[Figma draft](https://www.figma.com/file/4qoQyrVexARGzcAgMUTJEI/Marvel-APP?node-id=0%3A1) made by me.
