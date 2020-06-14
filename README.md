@@ -1,4 +1,5 @@
 # MARVEL-APP
+[![Build Status](https://travis-ci.com/alanlgoncalves/gobarber-web.svg?branch=master)](https://travis-ci.com/alanlgoncalves/gobarber-web)
 
 This project is an APP developed to show the Marvel characters information using the open Marvel API
 
