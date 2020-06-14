@@ -39,7 +39,7 @@ This project is an APP developed to show the Marvel characters information using
 
 ## Project Startup
 
-To run this project, you will need the dependencies belloy:
+To run this project, you will need the dependencies bellow:
 
 - Marvel API keys. Click [here](https://developer.marvel.com/) and select "Get a Key" to get a key!
 - Android SDK installed with a configured emulator
