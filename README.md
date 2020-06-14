@@ -7,12 +7,27 @@
 
 This project is an APP developed to show the Marvel characters information using the open Marvel API
 
+## Functionalities
+- Infinity scrollable characters order by name
+- Search characters by name
+- Character description (If available)
+- Character comics list with cover (If available)
+- Favorite characters list
+    - Character exclusion using swipe list item from right or left
+- Light/Dark themes
+
+![IOS](https://media.giphy.com/media/j72tfOVt66yUFmj6nH/giphy.gif)
+![Android](https://media.giphy.com/media/iHsNjwuiaRdU6u6hVG/giphy.gif)
+
+
 ## Technologies
 - Typescript
 - React Native
-- React Nagivation
+- React Navigation
+- React Native Paper
 - React Vector Icons
 - Styled-Components
+- Async Storage
 - Axios
 - MD5
 
@@ -22,11 +37,15 @@ This project is an APP developed to show the Marvel characters information using
 - [ESLint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 
-# Project Startup
+## Project Startup
 
-To run this project, you will need a Marvel API key. Click [here](https://developer.marvel.com/) and select "Get a Key" to get a key!
+To run this project, you will need the dependencies belloy:
 
-Set the keys on the file `marvel-app/src/config/api-key.ts`
+- Marvel API keys. Click [here](https://developer.marvel.com/) and select "Get a Key" to get a key!
+- Android SDK installed with a configured emulator
+- XCode installed with a configured emulator **(macOS only)**
+
+Set the Marvel API keys on the file `marvel-app/src/config/api-key.ts`
 
 ```
 const apiKey = {
