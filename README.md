@@ -48,11 +48,20 @@ To run this project, you will need the dependencies belloy:
 Set the Marvel API keys on the file `marvel-app/src/config/api-key.ts`
 
 ```
+import md5 from 'md5';
+
+const ts = 'marvel-api';
+const publicKey = 'public_key';
+const privateKey = 'private_key';
+const hash = md5(`${ts}${privateKey}${publicKey}`);
+
 const apiKey = {
-  ts: 'marvel-api',
-  apikey: 'public_key',
-  hash: md5('marvel-api' + 'private_key' + 'public_key'),
+  ts,
+  apikey: publicKey,
+  hash,
 };
+
+export default apiKey;
 ```
 
 If you are using NPM run:
