@@ -16,9 +16,8 @@ This project is an APP developed to show the Marvel characters information using
     - Character exclusion using swipe list item from right or left
 - Light/Dark themes
 
-![IOS](https://media.giphy.com/media/j72tfOVt66yUFmj6nH/giphy.gif)
-![Android](https://media.giphy.com/media/iHsNjwuiaRdU6u6hVG/giphy.gif)
-
+![Marvel APP - IOS](https://alansantos.dev/wp-content/uploads/2020/06/Marvel-APP-IOS.gif)
+![Marvel APP - Android](https://alansantos.dev/wp-content/uploads/2020/06/Marvel-APP-Android.gif)
 
 ## Technologies
 - Typescript
