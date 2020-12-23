@@ -1,11 +1,11 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { NavigationContainer } from '@react-navigation/native';
 import CharacterBottomNavigationBar from './character.routes';
 import { MainBottomNavigationBar } from './main.routes';
 import { useTheme } from '../hooks/Theme';
 
-const MainStackNavigator = createStackNavigator();
+const MainStackNavigator = createSharedElementStackNavigator();
 
 const Routes: React.FC = () => {
   const { theme } = useTheme();
@@ -25,6 +25,10 @@ const Routes: React.FC = () => {
           component={CharacterBottomNavigationBar}
           options={{
             headerShown: false,
+          }}
+          sharedElementsConfig={(route, otherRoute, showing) => {
+            const { character } = route.params;
+            return [`item.${character.id}.photo`];
           }}
         />
       </MainStackNavigator.Navigator>

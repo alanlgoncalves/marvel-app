@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { SharedElement } from 'react-navigation-shared-element';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/Feather';
 import {
@@ -122,11 +123,13 @@ const CharactersList: React.FC = () => {
           <HeroItem>
             <HeroItemSeparator />
             <HeroAvatarBorder style={{ borderColor: colors.border }}>
-              <HeroAvatarImage
-                source={{
-                  uri: `${item.thumbnail.path}.${item.thumbnail.extension}`,
-                }}
-              />
+              <SharedElement id={`item.${item.id}.photo`}>
+                <HeroAvatarImage
+                  source={{
+                    uri: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+                  }}
+                />
+              </SharedElement>
             </HeroAvatarBorder>
             <HeroInformation>
               <HeroNameText style={{ color: colors.text }}>

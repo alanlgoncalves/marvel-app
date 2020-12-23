@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { TouchableOpacity } from 'react-native';
+import { SharedElement } from 'react-navigation-shared-element';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Container, HeroDescription, HeroImage } from './styles';
@@ -75,7 +76,9 @@ const CharacterBio: React.FC<Props> = ({ route, navigation }: Props) => {
 
   return (
     <Container>
-      <HeroImage source={{ uri: imageUri }} />
+      <SharedElement id={`item.${character.id}.photo`}>
+        <HeroImage source={{ uri: imageUri }} />
+      </SharedElement>
       <HeroDescription style={{ color: colors.text }}>
         {character.description || 'No description available'}
       </HeroDescription>
