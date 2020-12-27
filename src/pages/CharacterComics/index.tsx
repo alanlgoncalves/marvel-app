@@ -7,7 +7,6 @@ import {
   Text,
 } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import apiKey from '../../config/api-key';
 import api from '../../services/api';
@@ -43,14 +42,8 @@ type RootStackParamList = {
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'Profile'>;
 
-type ProfileScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'Profile'
->;
-
 type Props = {
   route: ProfileScreenRouteProp;
-  navigation: ProfileScreenNavigationProp;
 };
 
 const CharacterComics: React.FC<Props> = ({ route }: Props) => {
