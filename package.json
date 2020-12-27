@@ -34,7 +34,7 @@
     "react-native-touchable-scale": "^2.1.2",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation-shared-element": "^5.0.0-alpha1",
-    "styled-components": "^5.1.1",
+    "styled-components": "^5.2.1",
     "yarn": "^1.22.4"
   },
   "devDependencies": {
@@ -46,7 +46,7 @@
     "@types/react-native": "^0.62.0",
     "@types/react-native-vector-icons": "^6.4.5",
     "@types/react-test-renderer": "16.9.2",
-    "@types/styled-components": "^5.1.0",
+    "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^3.1.0",
     "@typescript-eslint/parser": "^3.1.0",
     "babel-jest": "^24.9.0",
