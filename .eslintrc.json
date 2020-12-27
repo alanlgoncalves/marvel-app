@@ -33,6 +33,7 @@
     "react/require-default-props": "warn",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/no-unused-prop-types": "warn",
     "react/jsx-filename-extension": [
       1,
       {
